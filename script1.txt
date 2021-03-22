@@ -1,0 +1,15 @@
+help
+
+info
+add
+wer
+3
+4
+1
+0
+45
+wer
+45
+SADNESS
+erty
+execute_script script1.txt

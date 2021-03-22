@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<humanBeing>
+  <human>
+    <id>1</id>
+    <name>Julie</name>
+    <coordinates>
+      <coordinateX>1</coordinateX>
+      <coordinateY>2.0</coordinateY>
+    </coordinates>
+    <creationDate>2021-03-22 23:52:22</creationDate>
+    <realHero>true</realHero>
+    <hasToothpick>true</hasToothpick>
+    <impactSpeed>222.0</impactSpeed>
+    <soundtrackName>Sign of the times</soundtrackName>
+    <minutesOfWaiting>5.0</minutesOfWaiting>
+    <mood>SADNESS</mood>
+    <car>
+      <carName>bmw</carName>
+    </car>
+  </human>
+  <human>
+    <id>2</id>
+    <name>Vika</name>
+    <coordinates>
+      <coordinateX>3</coordinateX>
+      <coordinateY>4.0</coordinateY>
+    </coordinates>
+    <creationDate>2021-03-22 23:52:22</creationDate>
+    <realHero>false</realHero>
+    <hasToothpick>false</hasToothpick>
+    <impactSpeed>111.0</impactSpeed>
+    <soundtrackName>Diko tusim</soundtrackName>
+    <minutesOfWaiting>10.0</minutesOfWaiting>
+    <mood>CALM</mood>
+    <car>
+      <carName>Volga</carName>
+    </car>
+  </human>
+</humanBeing>
