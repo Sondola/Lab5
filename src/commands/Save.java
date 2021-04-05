@@ -31,7 +31,7 @@ public class Save implements Executable {
             System.out.println(e.getMessage());
             return false;
         } catch (XMLStreamException e) {
-            e.printStackTrace();
+            System.out.println("Error");
             return false;
         }
     }
