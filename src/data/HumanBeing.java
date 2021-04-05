@@ -15,25 +15,15 @@ import java.time.format.DateTimeFormatter;
 
 public class HumanBeing {
     private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
-    @XmlAttribute(name = "name")
     private String name; //Поле не может быть null, Строка не может быть пустой
-    @XmlElementWrapper(name="coordinates", nillable = true)
     private Coordinates coordinates; //Поле не может быть null
-    @XmlAttribute(name = "creationDate")
     private ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
-    @XmlAttribute(name = "realHero")
     private Boolean realHero; //Поле не может быть null
-    @XmlAttribute(name = "hasToothpick")
     private Boolean hasToothpick; //Поле может быть null
-    @XmlAttribute(name = "impactSpeed")
     private Float impactSpeed; //Значение поля должно быть больше -882, Поле может быть null
-    @XmlAttribute(name = "soundtrackName")
     private String soundtrackName; //Поле не может быть null
-    @XmlAttribute(name = "minutesOfWaiting")
     private float minutesOfWaiting;
-    @XmlAttribute(name = "mood")
     private Mood mood; //Поле может быть null
-    @XmlElementWrapper(name="car", nillable = true)
     private Car car; //Поле может быть null
 
     public HumanBeing(String name,
@@ -153,6 +143,7 @@ public class HumanBeing {
         human += "Наличие зубочистки: " + hasToothpick + "\n";
         human += "Скорость удара: " + impactSpeed + "\n";
         human += "Название песни: " + soundtrackName + "\n";
+        human += "Время ожидания: " + minutesOfWaiting + "\n";
         human += "Настроение: " + (mood != null? mood.toString() : "") + "\n";
         human += "Машина: " + car.getName() + "\n";
         return human;
@@ -207,15 +198,21 @@ public class HumanBeing {
             writer.writeCharacters(String.valueOf(minutesOfWaiting));
             writer.writeEndElement();
 
-            writer.writeStartElement("mood");
-            writer.writeCharacters(mood.toString());
-            writer.writeEndElement();
+            if (mood.toString().length() != 0) {
+                writer.writeStartElement("mood");
+                writer.writeCharacters(mood.toString());
+                writer.writeEndElement();
+            } else
+                writer.writeEmptyElement("mood");
 
             writer.writeStartElement("car");
 
-            writer.writeStartElement("carName");
-            writer.writeCharacters(car.getName());
-            writer.writeEndElement();
+            if (car.getName().length() != 0) {
+                writer.writeStartElement("carName");
+                writer.writeCharacters(car.getName());
+                writer.writeEndElement();
+            } else
+                writer.writeEmptyElement("carName");
 
             writer.writeEndElement();
 
