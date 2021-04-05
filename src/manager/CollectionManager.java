@@ -19,6 +19,7 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 public class CollectionManager {
     private LinkedHashSet<HumanBeing> humanBeings;
@@ -43,7 +44,7 @@ public class CollectionManager {
 
             humanBeings = handler.getHumans();
         } catch (SAXException | ParserConfigurationException | IOException e) {
-            e.printStackTrace();
+
         }
     }
 

@@ -2,11 +2,13 @@ package manager;
 
 import exceptions.IncorrectCommandException;
 import exceptions.RecursionScriptException;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 /**
  * Working environment for command line reading
+ *
  * @author NastyaBordun
  * @version 1.1
  */
@@ -29,9 +31,10 @@ public class Console {
 
     /**
      * Constructor - new working environment creating
+     *
      * @see Console#interactiveMode()
      */
-    public Console(BufferedReader br, AskManager askManager){
+    public Console(BufferedReader br, AskManager askManager) {
         this.br = br;
         this.askManager = askManager;
         this.work = true;
@@ -39,6 +42,7 @@ public class Console {
 
     /**
      * Setting {@link StringWorking} editor for commands
+     *
      * @param stringWorking
      */
     public void setStringWorking(StringWorking stringWorking) {
@@ -47,14 +51,16 @@ public class Console {
 
     /**
      * Setting working state
+     *
      * @param work needful state
      */
-    public void setWork(boolean work){
+    public void setWork(boolean work) {
         this.work = work;
     }
 
     /**
      * Checking the working state
+     *
      * @return working state
      */
     public boolean isWork() {
@@ -64,21 +70,18 @@ public class Console {
     /**
      * Work in the interactive mode
      */
-    public void interactiveMode(){
-        while(work){
-            try{
+    public void interactiveMode() {
+        while (work) {
+            try {
                 String command = br.readLine().trim();
-                if(stringWorking.chooseCommand(command)){
+                if (stringWorking.chooseCommand(command)) {
                     System.out.println("Команда выполнена успешно");
-                }
-                else{
+                } else {
                     System.out.println("Команда не выполнена");
                 }
-            }
-            catch (IOException e){
+            } catch (IOException e) {
                 System.out.println("Ошибка ввода");
-            }
-            catch (IncorrectCommandException | RecursionScriptException e){
+            } catch (IncorrectCommandException | RecursionScriptException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -86,12 +89,13 @@ public class Console {
 
     /**
      * Work with a script
-     * @param path path to file passed by chooseCommand method
+     *
+     * @param path     path to file passed by chooseCommand method
      * @param lastWork last value of working state for recursion
      * @see AskManager#addScriptMode(BufferedReader)
      */
-    public void scriptMode(String path, boolean lastWork){
-        try{
+    public void scriptMode(String path, boolean lastWork) {
+        try {
             FileInputStream file = new FileInputStream(path);
             BufferedInputStream bf2 = new BufferedInputStream(file);
             BufferedReader r2 = new BufferedReader(new InputStreamReader(bf2, StandardCharsets.UTF_8));
@@ -103,33 +107,29 @@ public class Console {
 
 //            this.setWork(true);
             String line = r2.readLine().trim();
-            while(line != null && this.work){
+            while (line != null && this.work) {
 //            while(line != null){
-                try{
-                    if(stringWorking.chooseCommand(line)){
+                try {
+                    if (stringWorking.chooseCommand(line)) {
                         System.out.println("Команда выполнена успешно");
-                    }
-                    else{
+                    } else {
                         System.out.println("Команда не выполнена");
                     }
 
-                }
-                catch (IncorrectCommandException | RecursionScriptException e){
+                } catch (IncorrectCommandException | RecursionScriptException e) {
                     System.out.println(e.getMessage());
                 }
                 line = r2.readLine();
             }
-            if(work){
-            setWork(lastWork);
-            askManager.setInteractiveMode(true);
+            if (work) {
+                setWork(lastWork);
+                askManager.setInteractiveMode(true);
             }
-        }
-        catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("Файл не найден");
             setWork(lastWork);
             askManager.setInteractiveMode(true);
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Ошибка ввода");
             setWork(lastWork);
             askManager.setInteractiveMode(true);

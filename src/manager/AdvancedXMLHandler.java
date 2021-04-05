@@ -36,39 +36,44 @@ public class AdvancedXMLHandler extends DefaultHandler{
 
         information = information.replace("\n", "").trim();
 
-        if (!information.isEmpty()) {
-            if (lastElementName.equals("name"))
-                name = information;
-            if (lastElementName.equals("coordinateX")) {
-                int intInformation = Integer.parseInt(information);
-                coordinates.setX(intInformation);
+        try {
+            if (!information.isEmpty()) {
+                if (lastElementName.equals("name"))
+                    name = information;
+                if (lastElementName.equals("coordinateX")) {
+                    int intInformation = Integer.parseInt(information);
+                    coordinates.setX(intInformation);
+                }
+                if (lastElementName.equals("coordinateY")) {
+                    float intInformation = Float.parseFloat(information);
+                    coordinates.setY(intInformation);
+                }
+                if (lastElementName.equals("realHero")) {
+                    realHero = information.equals("true")? true : false;
+                }
+                if (lastElementName.equals("hasToothpick")) {
+                    hasToothpick = information.equals("true")? true : false;
+                }
+                if (lastElementName.equals("impactSpeed")) {
+                    float floatInformation = Float.parseFloat(information);
+                    impactSpeed = floatInformation;
+                }
+                if (lastElementName.equals("soundtrackName"))
+                    soundtrackName = information;
+                if (lastElementName.equals("minutesOfWaiting")) {
+                    float floatInformation = Float.parseFloat(information);
+                    minutesOfWaiting = floatInformation;
+                }
+                if (lastElementName.equals("mood")) {
+                    mood = information.length() != 0? Mood.valueOf(information) : Mood.NULL;
+                }
+                if (lastElementName.equals("carName")) {
+                    car.setName(information);
+                }
             }
-            if (lastElementName.equals("coordinateY")) {
-                float intInformation = Float.parseFloat(information);
-                coordinates.setY(intInformation);
-            }
-            if (lastElementName.equals("realHero")) {
-                realHero = information.equals("true")? true : false;
-            }
-            if (lastElementName.equals("hasToothpick")) {
-                hasToothpick = information.equals("true")? true : false;
-            }
-            if (lastElementName.equals("impactSpeed")) {
-                float floatInformation = Float.parseFloat(information);
-                impactSpeed = floatInformation;
-            }
-            if (lastElementName.equals("soundtrackName"))
-                soundtrackName = information;
-            if (lastElementName.equals("minutesOfWaiting")) {
-                float floatInformation = Float.parseFloat(information);
-                minutesOfWaiting = floatInformation;
-            }
-            if (lastElementName.equals("mood")) {
-                mood = information.length() != 0? Mood.valueOf(information) : Mood.NULL;
-            }
-            if (lastElementName.equals("carName")) {
-                car.setName(information);
-            }
+        } catch (NumberFormatException e) {
+            System.out.println("Ошибка при чтении файла! Введите корректные данные!");
+            System.exit(0);
         }
     }
 
