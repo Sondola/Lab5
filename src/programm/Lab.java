@@ -17,13 +17,24 @@ public class Lab {
 
         try{
             FileInputStream is = new FileInputStream(args[0]);
-            //FileInputStream is = new FileInputStream("lab52.xml");
-        }catch (IOException | NullPointerException e) {
-            System.out.println("Ошибка доступа к файлу!");
-            System.exit(0);
+            //FileInputStream is = new FileInputStream("lab5.xml");
+        }catch (FileNotFoundException e) {
+            File file = new File(args[0]);
+            if (!file.canRead() && !file.canWrite()) {
+                try {
+                    file.createNewFile();
+                    System.out.println("Файла не было, но мы его создали!");
+                } catch (IOException e2) {
+                    System.out.println("error");
+                    System.exit(0);
+                }
+            } else {
+                System.out.println("Ошибка доступа");
+                System.exit(0);
+            }
         }
         File fileName = new File(args[0]);
-        //File fileName = new File("lab52.xml");
+        //File fileName = new File("lab5.xml");
 
         BufferedInputStream bf = new BufferedInputStream(System.in);
         BufferedReader r = new BufferedReader(new InputStreamReader(bf, StandardCharsets.UTF_8));
@@ -52,5 +63,6 @@ public class Lab {
         console.setStringWorking(stringWorking);
 
         console.interactiveMode();
+
     }
 }
